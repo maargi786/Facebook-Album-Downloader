@@ -10,9 +10,9 @@ Facebook Album Downloader is PHP based web application it’s helps us to downlo
 * When user wants to download album - subfolder is created for album photos inside ‘Download’ directory and that will be deleted immediately after creating zip file for user. That will maintain the privacy of user.
 * When user wants to upload album – subfolder is created inside ‘Upload’ directory and all the subfolder will be upload into the `facebook_<username>_album` where <username> will be the Facebook username of user, it will also be deleted after uploading albums.
 * Facebook-Album-Downloader will asked user to connect with their Google account only once, no matter how many times they choose to move data.
-## Link
+## Application Link
 The Facebook-Album-Downloader is hosted on https://patelmargi.azurewebsites.net/FacebookAlbumDownloader
-## Instruction
+## Application Instruction
 Facebook `Album-Downloader-App` is not review yet. so, If you want to connect with Facebook-Album-Downloader you notify me and perform following steps:
 1. First, you need to confirm the invitation of Album-Downloader-App app from your Facebook.
 2. Open the https://developers.facebook.com/tools/explorer/ and select the Album-Downloader-App Application from the top-right drop-down menu and click get token below from the application menu and select Get User Access Token.
