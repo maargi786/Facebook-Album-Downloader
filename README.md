@@ -8,7 +8,7 @@ Facebook Album Downloader is PHP based web application it’s helps us to downlo
 * You can also **logout** from the Facebook-Album-Downloader. (It will logout from your Facebook)
 ## System Functionality
 * When user wants to download album - subfolder is created for album photos inside ‘Download’ directory and that will be deleted immediately after creating zip file for user. That will maintain the privacy of user.
-* When user wants to upload album – subfolder is created inside ‘Upload’ directory and all the subfolder will be upload into the facebook_<username>_album where <username> will be the Facebook username of user, it will also be deleted after uploading albums.
+* When user wants to upload album – subfolder is created inside ‘Upload’ directory and all the subfolder will be upload into the `facebook_<username>_album` where <username> will be the Facebook username of user, it will also be deleted after uploading albums.
 * Facebook-Album-Downloader will asked user to connect with their Google account only once, no matter how many times they choose to move data.
 ## Link
 The Facebook-Album-Downloader is hosted on https://patelmargi.azurewebsites.net/FacebookAlbumDownloader
