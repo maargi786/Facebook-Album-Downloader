@@ -13,7 +13,7 @@ Facebook Album Downloader is PHP based web application it’s helps us to downlo
 ## Link
 The Facebook-Album-Downloader is hosted on https://patelmargi.azurewebsites.net/FacebookAlbumDownloader
 ## Instruction
-Album-Downloader App of facebook is not review yet. so, If you want to connect with Facebook-Album-Downloader you notify me and perform following steps:
+Facebook `Album-Downloader-App` is not review yet. so, If you want to connect with Facebook-Album-Downloader you notify me and perform following steps:
 1. First, you need to confirm the invitation of Album-Downloader-App app from your Facebook.
 2. Open the https://developers.facebook.com/tools/explorer/ and select the Album-Downloader-App Application from the top-right drop-down menu and click get token below from the application menu and select Get User Access Token.
 3. That will open the Select Permission popup and choose the user_photos checkbox and click on the Get Access Token. It will provide the accessibility for your Facebook album.
