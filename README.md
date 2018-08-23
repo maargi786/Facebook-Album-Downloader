@@ -1,2 +1,2 @@
 # Facebook-Album-Downloader
-This is php based web application
+Facebook Album Downloader is PHP based web application it’s helps us to download our Facebook album and also upload it to the drive.
