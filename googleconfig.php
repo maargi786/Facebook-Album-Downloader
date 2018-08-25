@@ -12,8 +12,8 @@
 
     //create object of google client and set various property like client id, secret, redirecturi, etc.
     $client = new Google_Client();
-    $client->setClientId('724022324585-iekavkqi42ndpr0sci3ijb99v9p7lj00.apps.googleusercontent.com'); 
-    $client->setClientSecret('z4Jw5oKf3gmYYQiRAQHuBVbQ');
+    $client->setClientId('__GOOGLE APP ID__'); 
+    $client->setClientSecret('__GOOGLE APP SECRET KEY__');
     $client->setRedirectUri($url);
     $client->setScopes(array('https://www.googleapis.com/auth/drive'));
     
