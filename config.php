@@ -4,8 +4,8 @@
 
 	//APP_CONFIG This is for facebook-album-downloader app
     $fb = new Facebook\Facebook([
-  				'app_id' => '189382341844324',
-	  			'app_secret' => '0da5a6ae294fa18c816c182e9010cbf1',
+  				'app_id' => '__APP ID__',
+	  			'app_secret' => '__APP SECRET KEY__',
 	  			'default_graph_version' => 'v2.11',
   			]);
 
@@ -15,7 +15,7 @@
 	//login url
 	$loginUrl = $helper->getLoginUrl('https://patelmargi.azurewebsites.net/FacebookAlbumDownloader/fbcallback.php', $permissions);
 	//logout url
-	$logoutUrl = $helper->getLogoutUrl($_SESSION['fb_access_token'],'http://patelmargi.azurewebsites.net/FacebookAlbumDownloader/logout.php');
+	$logoutUrl = $helper->getLogoutUrl($_SESSION['fb_access_token'],'https://patelmargi.azurewebsites.net/FacebookAlbumDownloader/logout.php');
 
 	//header("location:" . $loginUrl);
 
@@ -52,8 +52,8 @@
 	function getCover($albumId)
 	{
 		$fb = new Facebook\Facebook([
-  				'app_id' => '189382341844324',
-	  			'app_secret' => '0da5a6ae294fa18c816c182e9010cbf1',
+  				'app_id' => '__APP ID__',
+	  			'app_secret' => '__APP SECRET KEY__',
 	  			'default_graph_version' => 'v2.11',
   			]);
 		try {
