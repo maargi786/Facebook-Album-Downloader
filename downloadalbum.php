@@ -19,9 +19,9 @@
         try {
             $a=$ID; //store album id into temporary variable $a
             //fetch the album photos,name,etc.
-            $response = $fb->get('/'.$a.'/photos?fields=picture,name,images&limit=1000',$_SESSION['fb_access_token']); 
+            $response = $fb->get('/'.$a.'/photos?fields=picture,name,images&limit=100',$_SESSION['fb_access_token']); 
             //fetch all album with there photos
-            $getAlbum = $fb->get('/'.$a.'?fields=name,photos.limit(1000){images,name,created_time}',$_SESSION['fb_access_token']);
+            $getAlbum = $fb->get('/'.$a.'?fields=name,photos.limit(100){images,name,created_time}',$_SESSION['fb_access_token']);
         }catch(FacebookExceptionsFacebookResponseException $e){
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
