@@ -17,11 +17,11 @@
     }   
     foreach ($albums as $ID) {
         try {
-            $a=$ID; //store album id into temporary variable $a
+            $getAlbumId=$ID; //store album id into temporary variable $getAlbumId
             //fetch the album photos,name,etc.
-            $response = $fb->get('/'.$a.'/photos?fields=picture,name,images&limit=100',$_SESSION['fb_access_token']); 
+            $response = $fb->get('/'.$getAlbumId.'/photos?fields=picture,name,images&limit=100',$_SESSION['fb_access_token']); 
             //fetch all album with there photos
-            $getAlbum = $fb->get('/'.$a.'?fields=name,photos.limit(100){images,name,created_time}',$_SESSION['fb_access_token']);
+            $getAlbum = $fb->get('/'.$getAlbumId.'?fields=name,photos.limit(100){images,name,created_time}',$_SESSION['fb_access_token']);
         }catch(FacebookExceptionsFacebookResponseException $e){
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -38,7 +38,7 @@
             mkdir($tmp_dir, 0777);
         }
         
-        $albumId = $a; //store value of a into albumId varialbe
+        $albumId = $getAlbumId; //store value of a into albumId varialbe
         $album = $getAlbum->getGraphNode()->asArray(); //Store all album details as array into album
 
         //apply various filter on album name and store it into albumName varialbe
