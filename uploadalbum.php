@@ -15,50 +15,81 @@
     {
         //if then store album into albums
         $albums = $_REQUEST["album"];
+    }
+
+
+    $access_token = $_SESSION["fb_access_token"];
+
+    //if not exits then create temporary directory named 'Download'
+    $tmp_dir = __DIR__.'/Upload/';
+    if (!is_dir($tmp_dir)) {
+        mkdir($tmp_dir, 0777);
     }   
+    
     foreach ($albums as $ID) {
         try {
-            $a=$ID;  //store album id into temporary variable $a
-            //fetch the album photos,name,etc.
-            $response = $fb->get('/'.$a.'/photos?fields=picture,name,images&limit=100',$_SESSION['fb_access_token']);
-            //fetch all album with there photos
-            $getAlbum = $fb->get('/'.$a.'?fields=name,photos.limit(100){images,name,created_time}',$_SESSION['fb_access_token']);
+            $albumid = $ID;
+            $response = $fb->get('/'.$albumid.'/?fields=name',$_SESSION['fb_access_token']);
+            $album = $response->getGraphNode()->asArray();
+            $albumName = $album['name'];
+            $albumName = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $albumName);
+            $albumName = mb_ereg_replace("([\.]{2,})", '', $albumName);
+            
+            //fetching the images albumwise
+            $access_url="https://graph.facebook.com/v2.11/".$albumid."/photos?fields=name,images%2Calbum&access_token=".$access_token;
+            $result = file_get_contents($access_url);
+            $pic=json_decode($result);
+            $existphotokey=(array)$pic;
+            $page=(array)$pic->paging;
+            
+            //check that paging is there or not
+            if(array_key_exists("next",$page))
+            {
+                $access_url=$page["next"]; //if paging that set access_url to page url
+            }
+
+            //create directory inside the temp_dir('Download') having album name
+            $path = $tmp_dir.$albumName.'/';
+            if (!is_dir($path)) {
+                mkdir($path, 0777);
+            }
+            //fetch image with paging
+            do
+            { 
+                //check that paging is there or not           
+                if(array_key_exists("next",$page))
+                {
+                    $access_url=$page["next"]; //if paging that set access_url to page url
+                }
+                else
+                {
+                    $access_url="none"; //if paging is not there then set 'none'
+                }
+                foreach($pic->data as $mydata)
+                {
+                    $image_url = $mydata->images[0]->source; //fetch image link
+                    $photoId = $mydata->id; //fetch the is of album photo
+                    $file = $path.$photoId.'.jpg'; //set the name of album photo as id.jpg
+                    file_put_contents($file, file_get_contents($image_url));   
+                }
+
+                //if access_url is none set result to previous access_url    
+                if($access_url!="none")
+                {
+                    $result = file_get_contents($access_url);
+                }
+
+                $pic=json_decode($result);
+                $existphotokey=(array)$pic;
+                $page=(array)$pic->paging; //set pagging link
+            }while($access_url!="none");
         }catch(FacebookExceptionsFacebookResponseException $e){
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
         }catch(FacebookExceptionsFacebookSDKException $e) {
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
-        }
-        //store all album photos as array
-        $graphNode = $response->getGraphEdge()->asArray();  
-
-        //if not exits then create temporary directory named 'Download'
-        $tmp_dir = __DIR__.'/Upload/';
-        if (!is_dir($tmp_dir)) {
-            mkdir($tmp_dir, 0777);
-        }
-        
-        $albumId = $a; //store value of a into albumId varialbe
-        $album = $getAlbum->getGraphNode()->asArray(); //Store all album details as array into album
-
-        //apply various filter on album name and store it into albumName varialbe
-        $albumName = $album['name'];
-        $albumName = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $albumName);
-        $albumName = mb_ereg_replace("([\.]{2,})", '', $albumName);
-        
-        //create directory inside the temp_dir('Download') having album name
-        $path = $tmp_dir.$albumName.'/';
-        if (!is_dir($path)) {
-            mkdir($path, 0777);
-        }
-
-        //copy the each album photo into the album directory
-        foreach ($album['photos'] as $photo) {
-            $file = $photo['id'].'.jpg';
-            // echo "<br>PATH:".$path.$file;
-            copy($photo['images'][0]['source'], $path.$file);
-        }
+        }  
     }
     
     $files = array(); //create files as array
