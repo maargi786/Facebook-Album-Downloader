@@ -13,4 +13,4 @@ Facebook Album Downloader is PHP based web application it’s helps us to downlo
 ## Application Link
 The Facebook-Album-Downloader is hosted on https://patelmargi.azurewebsites.net/FacebookAlbumDownloader
 ## Application Instruction
-Facebook `Album-Downloader-App` is not review yet. so, If you want to connect with Facebook-Album-Downloader you notify me and need to confirm the invitation of Album-Downloader-App app from your Facebook.
+Facebook `Album-Downloader-App` is not review yet. so, If you want to connect with Facebook-Album-Downloader, you need to notify me and confirm the invitation of Album-Downloader-App app from your Facebook.
