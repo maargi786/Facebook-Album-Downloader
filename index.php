@@ -28,8 +28,8 @@
   <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
-  <!-- Intro Section
+<body onload="setInterval(setRandomColor, 300)">
+  <!-- Facebook Album Downloader Intro Section
   ============================-->
   <section id="intro">
     <div class="intro-container">
@@ -41,12 +41,11 @@
             </div>
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2 class="animated fadeInDown">Facebook Album Downloader</h2>
+                <h2 class="animated fadeInDown" id="colorpad">Facebook Album Downloader</h2>
                 <p>Facebok Album Downloader hepls you to download and upload your album.</p>
                 <!-- login with facebook button div tag -->
                 <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true" data-scope="public_profile" onlogin="checkLoginState();">
-                </div><br/><br/>
-                <a href="pdf/Facebook_Album_Downloader_Instruction.pdf" target="_blank" style="text-decoration: underline; font-size: 14px; ">read instruction</a>
+                </div>
               </div>
             </div>
           </div>
@@ -77,6 +76,25 @@
 
   <!-- Facebook Javascript File -->
   <script type="text/javascript" src="js/fb.js"></script>
+  
+  <!-- colorpad changes the color -->
+  <script type="text/javascript">
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF'; //Hexadecimal letter string
+      var color = '#'; //colorcode value starting from '#'
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)]; //generate color code randomly
+      }
+      return color; //return color code
+    }
+
+
+
+	function setRandomColor() {
+		$("#colorpad").css("color", getRandomColor()); //set random color code to colorpad
+	}
+
+  </script>
 
 </body>
 </html>
