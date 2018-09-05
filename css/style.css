@@ -578,7 +578,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #portfolio .portfolio-item figure .link-preview:hover, #portfolio .portfolio-item figure .link-download:hover, #portfolio .portfolio-item figure .link-cloud:hover {
-  background: #18d26e;
+  background: #3B5998;
 }
 
 #portfolio .portfolio-item figure .link-preview:hover i, #portfolio .portfolio-item figure .link-download:hover i, #portfolio .portfolio-item figure .link-cloud:hover i {
@@ -796,9 +796,56 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 /* Album Slider
 --------------------------------*/
+/* The Modal (background) */
+.modalSlider {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 95px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content-slider {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 3px;
+  border: 1px solid #888;
+  width: 80%;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.closeSlider {
+    color: white;
+    z-index: 1;
+    float: right;
+    margin-top: -30px;
+    position: absolute;
+    left: 91%;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.closeSlider:hover,
+.closeSlider:focus {
+    color: #282828;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .slidercontainer {
   width:100%;
-  height:100vh;
+  height:80vh;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -818,7 +865,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .carousel-item img{
   width: inherit;
-  height: 100vh;
+  height: 80vh;
 }
 
 .carousel-indicators {
@@ -842,8 +889,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 .carousel .icon-container {
   display: inline-block;
-  font-size: 3.5vw;
-  line-height: 25px;
+  font-size: 2.5vw;
+  line-height: 20px;
   padding: .5em;
   text-align: center;
   border-radius: 50%;
@@ -852,10 +899,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 .carousel-caption h1{
   text-align: center;  
   margin-bottom: 5px;
-  font-size: 4vw;
+  font-size: 2.5vw;
   /*font-weight: bold;*/
   font-family:verdana;
-  padding-bottom: 2px;
+  padding-bottom: -10px;
   text-align: center;
   color: #f8f9fa;
   font-weight: 700;
@@ -864,11 +911,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 .carousel-caption h3{
   text-align: center;  
   margin-bottom: 0px;
-  font-size: 3vw;
+  font-size: 1.5vw;
   font-weight: bold;
-  font-family: "Montserrat", sans-serif;
   text-align: center;
-  padding-bottom: -1px
+  padding-bottom: -3px
   font-weight: 300;
 }
 
@@ -880,7 +926,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
   text-align: center;
-  padding-bottom: -1px
+  padding-bottom: -3px;
   font-weight: 300;
   background-color: rgba(0, 0, 0, .4);
 
@@ -889,10 +935,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 .carousel-caption h4{
   text-align: center;  
   margin-bottom: 10px;
-  font-size: 1.5vw;
+  font-size: .9vw;
   font-style: italic;
   font-family:verdana;
- /*text-transform: uppercase;*/
   text-align: center;
   font-weight: 200;
   color: #18d26e;
@@ -916,26 +961,6 @@ body.mobile-nav-active #mobile-nav-toggle {
   -webkit-animation-delay: 1s;
           animation-delay: 1s;
 }
-/*.carousel-caption button {
-  -webkit-animation-delay: 3s;
-          animation-delay: 3s;
-}*/
-
-/*.sclidercontainer h1 {
-  text-align: center;  
-  margin-bottom: 30px;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.sclidercontainer .p {
-  padding-top: 125px;
-  text-align: center;
-}
-
-.sclidercontainer .p a {
-  text-decoration: underline;
-}*/
 
 /* Footer
 --------------------------------*/
