@@ -55,12 +55,6 @@
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
 
-  <!-- javascript for audio when user click on download icon -->
-  <!-- <script type="text/javascript">
-    var beep = new Audio();
-    beep.src = "sound/beep.mp3";
-  </script> -->
-
   <style type="text/css">    
     #child {
         display: none;
@@ -331,6 +325,9 @@
     function fetchAlbumImages(albumId)
     {
       data = albumId; //store the albumId in variable 'data'
+      
+      // set display property of 'myModalSlider' to 'block'
+      document.getElementById('myModalSlider').style.display='block';
       
       req=new XMLHttpRequest(); //create XMLHttpRequest object named 'req'
       
