@@ -13,12 +13,13 @@
       foreach ($albums as $album) {
         //album id sperated by ','
         $albumIds .= $album['id'].',';
-        // get the album coverphotoes and store it to albumVar
+        // get the album coverphotoes
         $album['cover_photo'] = getCover($album['cover_photo']['id']); 
         $albumVar[] = $album;
       }
     } else{
-      echo "<script type='text/javascript'>alert('Please, Read the instruction carefully and Provide the accessiblity of your facebook albums!!');</script>";
+      echo "<script type='text/javascript'>alert('Please, provide the access for your albums!!');</script>";
+
     }
 ?>
 <!DOCTYPE html>
@@ -46,15 +47,19 @@
   <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
   <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
+  <script src="https://use.fontawesome.com/250f8590fa.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css'> -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+  
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
 
   <!-- javascript for audio when user click on download icon -->
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     var beep = new Audio();
     beep.src = "sound/beep.mp3";
-  </script>
+  </script> -->
 
   <style type="text/css">    
     #child {
@@ -89,7 +94,7 @@
             </li>
             <li class="menu-has-children"><a style="color:white; cursor: pointer;"><?php echo $user['name'] ?></a>
               <ul>
-                <li><a href="<?php echo $logoutUrl; ?>">Log Out</a></li>
+                <li><a href="logout.php">Log Out</a></li>
               </ul>
             </li>
           </ul>
@@ -114,7 +119,7 @@
         </header>
         <div class="row portfolio-container">
           <!-- Diplay each album of user's -->
-          <?php foreach ($albumVar as $value) { ?> <!-- foreach loop start -->
+          <?php foreach ($albumVar as $value) { $albumID = $value['id']; ?> <!-- foreach loop start -->
           <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
             <div class="portfolio-wrap">
               <figure>
@@ -123,9 +128,17 @@
                       style="height:100%; width: 100%" 
                       class="img-fluid" 
                       alt="">
-                <!-- User's album sclide shows -->
-                <a onclick="window.open('fbalbum_slider.php?id=<?php echo $value['id']; ?>','_blank','toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=750,height=550')"  
+                <!-- User's album sclide shows in new window -->
+                <!-- <a onclick="window.open('fbalbum_slider.php?id=<?php echo $value['id']; ?>','_blank','toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=750,height=550')"  
                       data-title="App 1" 
+                      style="cursor: pointer;"
+                      class="link-preview" 
+                      onclick="document.getElementById('myModalSlider').style.display='block'"
+                      title="preview album">
+                    <i class="ion ion-eye"></i>
+                </a> -->
+                <!-- User's album sclide shows with AJAX in same window -->
+                <a onclick="fetchAlbumImages('<?php echo $albumID; ?>')"
                       style="cursor: pointer;"
                       class="link-preview" 
                       title="preview album">
@@ -195,6 +208,13 @@
     </div>
   </div>
 
+<!--==========================
+    Popup Sclider Model
+  ============================-->
+<div id="myModalSlider" class="modalSlider">
+  
+</div>
+
   <!-- JavaScript Libraries -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/jquery/jquery-migrate.min.js"></script>
@@ -209,7 +229,10 @@
   <script src="lib/isotope/isotope.pkgd.min.js"></script>
   <script src="lib/lightbox/js/lightbox.min.js"></script>
   <script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
-
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://unpkg.com/popper.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
+    <script  src="js/sclider.js"></script>
   <!-- Main Javascript File -->
   <script src="js/main.js"></script>
 
@@ -288,6 +311,53 @@
     //         modal.style.display = "none";
     //     }
     // }
+
+    // Get the modal for Image Slider
+    var modalAlbumSlider = document.getElementById('myModalSlider');
+
+    // Get the button that opens the image slider model
+    var btnPreview = document.getElementById("myBtnPreview");
+
+    // Get the <span> element that closes the image slider modal
+    var spanSlider = document.getElementsByClassName("closeSlider")[0];    
+
+    // When the user clicks anywhere outside of the image slider modal, close it
+    // window.onclick = function(event) {
+    //     if (event.target == modalAlbumSlider) {
+    //         modalAlbumSlider.style.display = "none";
+    //     }
+    // }
+
+    function fetchAlbumImages(albumId)
+    {
+      data = albumId; //store the albumId in variable 'data'
+      
+      req=new XMLHttpRequest(); //create XMLHttpRequest object named 'req'
+      
+      //call open method of XMLHttpRequest with three perameter 
+      // 1. type of request --> post
+      // 2. file location --> 'fbalbum_sclider.php'
+      // 3. set asynchronous proerty true
+      req.open("POST","fbalbum_slider.php",true);
+      
+      // set request header
+      req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      
+      //pass the data you want to send with post method
+      req.send("ID="+data);
+      
+      // set display property of 'myModalSlider' to 'block'
+      document.getElementById('myModalSlider').style.display='block';
+      
+      // check onreadystatechange property status
+      req.onreadystatechange =function(){
+        if(req.readyState == 4 && req.status == 200)
+        {
+          document.getElementById("myModalSlider").innerHTML=req.responseText;
+        }
+      }
+
+    }
   </script>
 </body>
 </html>
