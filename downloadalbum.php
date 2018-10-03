@@ -15,7 +15,6 @@
         //if then store album into albums
         $albums = $_REQUEST["album"];
     }   
-    echo "hello";
     $access_token = $_SESSION["fb_access_token"];
 
     //if not exits then create temporary directory named 'Download'
