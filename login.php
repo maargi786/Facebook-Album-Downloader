@@ -10,8 +10,7 @@
 	  			'default_graph_version' => 'v2.11',
   			]);
 
-    $helper = $fb->getRedirectLoginHelper();
-    $helper = $fb->getRedirectLoginHelper();
+    	$helper = $fb->getRedirectLoginHelper();
 	$permissions = array('email', 'user_photos'); // provide the permission of user email and photos
 	
 	//fetch the login url and varios permissions
