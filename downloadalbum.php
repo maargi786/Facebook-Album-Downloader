@@ -15,7 +15,7 @@
         //if then store album into albums
         $albums = $_REQUEST["album"];
     }   
-    
+    echo "hello";
     $access_token = $_SESSION["fb_access_token"];
 
     //if not exits then create temporary directory named 'Download'
@@ -24,6 +24,7 @@
         mkdir($tmp_dir, 0777);
     }   
     
+    echo "<script>alert('download make')</script>";
     foreach ($albums as $ID) {
         try {
             $albumid = $ID;
